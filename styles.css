@@ -1,0 +1,135 @@
+html, body {
+  font-family: 'Inconsolata', monospace;
+  color: rgb(34, 34, 34);
+  background-color: rgb(210, 201, 191);
+  background-repeat: repeat;
+}
+
+#standard-clock {
+  font-size: 3em;
+  padding-bottom: 2em;
+  display: block;
+  color: rgb(34, 34, 34);
+}
+
+.label {
+  font-size: 1em;
+}
+
+#standard-time {
+  color: rgb(34, 34, 34);
+  font-size: 3em;
+}
+
+#decimal-clock {
+  font-size: 3em;
+  display: block;
+}
+
+#decimal-time {
+  font-size: 3em;
+  color: rgb(0,0,140);
+}
+
+.notation {
+  font-size: 1em;
+}
+
+.clock-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  margin: auto;
+  margin-top: 10em;
+  max-width: 100%;
+  padding-bottom: 20px;
+  align-content: space-around;
+  justify-content: center;
+}
+
+.toggle {
+  font-size: 0.4em;
+  color: rgb(34, 34, 34);
+  margin: auto;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  font-family: 'Inconsolata', monospace;
+}
+
+@media (max-width: 1000px) {
+  .clock-container {
+    max-width: 50%;
+  }
+  #standard-time {
+    font-size: 2.2em;
+  }
+  #decimal-time {
+    font-size: 2.2em;
+  }
+  .label {
+    font-size: 0.8em;
+  }
+  .notation {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 800px) {
+  .clock-container {
+    max-width: 50%;
+  }
+  #standard-time {
+    font-size: 2em;
+  }
+  #decimal-time {
+    font-size: 2em;
+  }
+  .label {
+    font-size: 0.7em;
+  }
+  .notation {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 600px) {
+  .clock-container {
+    max-width: 100%;
+  }
+  #standard-time {
+    font-size: 1.8em;
+  }
+  #decimal-time {
+    font-size: 1.8em;
+  }
+  .label {
+    font-size: 0.6em;
+  }
+  .notation {
+    font-size: 0.6em;
+  }
+}
+
+@media (max-width: 400px) {
+  .clock-container {
+    max-width: 100%;
+  }
+  #standard-time {
+    font-size: 1.2em;
+  }
+  #decimal-time {
+    font-size: 1.2em;
+  }
+  .label {
+    font-size: 0.5em;
+  }
+  .notation {
+    font-size: 0.5em;
+  }
+  .toggle {
+    font-size: 0.2em;
+  }
+}

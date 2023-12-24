@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>decimal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&amp;display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="./favicon.png"> 
+  </head>
+  <body>
+    <div class="clock-container">
+      <div id="standard-clock">
+        <span class="notation">::</span> <span class="label">STANDARD TIME</span> <button class="toggle" name="toggle-standard", onclick="toggleClock('standard-time', this)">[hide]</button>
+        <div id="standard-time"></div>
+      </div>
+      <div id="decimal-clock">
+        <span class="notation">..</span> <span class="label">DECIMAL TIME</span> <button class="toggle" name="toggle-decimal", onclick="toggleClock('decimal-time', this, showColor='rgb(0,0,140)')">[hide]</button>
+        <div id="decimal-time"></div>
+      </div>
+    </div>
+    <script>
+      function updateStandardTime() {
+        now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        const newStnTime = ("00"+hours).slice(-2)+":"+("00"+minutes).slice(-2)+":"+("00"+seconds).slice(-2);
+        const prevStnTime = document.getElementById("standard-time").innerHTML;
+        if (newStnTime != prevStnTime) {
+          document.getElementById("standard-time").innerHTML = newStnTime;
+        }
+      }
+
+      function updateDecimalTime() {
+        stnSecs = standardTimeToSeconds(new Date());
+        decSecs = stnSecs * (100000 / 86400);
+        decHrs = Math.floor(decSecs / 10000);
+        decSecs = decSecs - 10000 * decHrs;
+        decMins = Math.floor(decSecs / 100);
+        decSecs = Math.floor(decSecs - 100 * decMins);
+        const newDecTime = ("00"+decHrs).slice(-2)+"."+("000"+decMins).slice(-3)+"."+("000"+decSecs).slice(-3);
+        const prevDecTime = document.getElementById("decimal-time").innerHTML;
+        if (newDecTime != prevDecTime) {
+          document.getElementById("decimal-time").innerHTML = newDecTime;
+        }
+      }
+
+      function standardTimeToSeconds(ts) {
+        var hours = ts.getHours();
+        var minutes = ts.getMinutes();
+        var seconds = ts.getSeconds() + ts.getMilliseconds()/1000;
+        return (hours * 3600) + (minutes * 60) + seconds;
+      }
+      
+      setInterval(function () {
+        updateStandardTime();
+        updateDecimalTime();
+      }, 0);
+
+      function toggleClock(clockId, caller, showColor="rgb(34, 34, 34)") {
+        var clock = document.getElementById(clockId);
+        if (clock.style.color === "rgb(210, 201, 191)") {
+          clock.style.color = showColor;
+          caller.innerHTML = "[hide]";
+        } else {
+          clock.style.color = "rgb(210, 201, 191)";
+          caller.innerHTML = "[show]";
+        }
+      }
+    </script>
+  </body>
+</html>
