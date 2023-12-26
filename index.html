@@ -8,17 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&amp;display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="icon" type="image/x-icon" href="./favicon.png"> 
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
   </head>
   <body>
-    <div class="clock-container">
-      <div id="standard-clock">
-        <span class="notation">::</span> <span class="label">STANDARD TIME</span> <button class="toggle" name="toggle-standard", onclick="toggleClock('standard-time', this)">[hide]</button>
-        <div id="standard-time"></div>
+    <div id="header-container">
+        <span style="color: rgb(34,34,34)">[::] is</span><span style="color: rgb(0,0,140)">&nbsp;[..]</span>
+    </div>
+    <div class="clocks-container">
+      <div id="stn-clock">
+        <span id="stn-label">STANDARD TIME [::]</span>
+        <div id="stn-time" class="time"></div>
       </div>
-      <div id="decimal-clock">
-        <span class="notation">..</span> <span class="label">DECIMAL TIME</span> <button class="toggle" name="toggle-decimal", onclick="toggleClock('decimal-time', this, showColor='rgb(0,0,140)')">[hide]</button>
-        <div id="decimal-time"></div>
+      <div id="divider">is</div>
+      <div id="dec-clock">
+        <div id="dec-time" class="time"></div>
+        <span id="dec-label">DECIMAL TIME [..]</span>
       </div>
     </div>
     <script>
@@ -28,9 +32,9 @@
         var minutes = now.getMinutes();
         var seconds = now.getSeconds();
         const newStnTime = ("00"+hours).slice(-2)+":"+("00"+minutes).slice(-2)+":"+("00"+seconds).slice(-2);
-        const prevStnTime = document.getElementById("standard-time").innerHTML;
+        const prevStnTime = document.getElementById("stn-time").innerHTML;
         if (newStnTime != prevStnTime) {
-          document.getElementById("standard-time").innerHTML = newStnTime;
+          document.getElementById("stn-time").innerHTML = newStnTime;
         }
       }
 
@@ -41,10 +45,10 @@
         decSecs = decSecs - 10000 * decHrs;
         decMins = Math.floor(decSecs / 100);
         decSecs = Math.floor(decSecs - 100 * decMins);
-        const newDecTime = ("00"+decHrs).slice(-2)+"."+("000"+decMins).slice(-3)+"."+("000"+decSecs).slice(-3);
-        const prevDecTime = document.getElementById("decimal-time").innerHTML;
+        const newDecTime = ("00"+decHrs).slice(-2)+"."+("00"+decMins).slice(-2)+"."+("00"+decSecs).slice(-2);
+        const prevDecTime = document.getElementById("dec-time").innerHTML;
         if (newDecTime != prevDecTime) {
-          document.getElementById("decimal-time").innerHTML = newDecTime;
+          document.getElementById("dec-time").innerHTML = newDecTime;
         }
       }
 
@@ -59,17 +63,6 @@
         updateStandardTime();
         updateDecimalTime();
       }, 0);
-
-      function toggleClock(clockId, caller, showColor="rgb(34, 34, 34)") {
-        var clock = document.getElementById(clockId);
-        if (clock.style.color === "rgb(210, 201, 191)") {
-          clock.style.color = showColor;
-          caller.innerHTML = "[hide]";
-        } else {
-          clock.style.color = "rgb(210, 201, 191)";
-          caller.innerHTML = "[show]";
-        }
-      }
     </script>
   </body>
 </html>
