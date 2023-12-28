@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>decimal</title>
+    <title>standard is decimal</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&amp;display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="icon" type="image/x-icon" href="./favicon.png">
+    <script src="clocks.js"></script>
   </head>
   <body>
     <div id="header-container">
-        <span style="color: rgb(34,34,34)">[::] is</span><span style="color: rgb(0,0,140)">&nbsp;[..]</span>
+        <span>[::] is</span><span id="title-symbol" style="color: rgb(0,0,140)">&nbsp;[..]</span>
     </div>
     <div class="clocks-container">
       <div id="stn-clock">
@@ -22,47 +22,44 @@
       <div id="divider">is</div>
       <div id="dec-clock">
         <div id="dec-time" class="time"></div>
-        <span id="dec-label">DECIMAL TIME [..]</span>
+        <span id="dec-label">DECIMAL TIME&nbsp;</span>
+        <button id="dec-btn" class="rep-btn">[..]</button>
+        <button id="frac-btn" class="rep-btn">[.d]</button>
+        <button id="perc-btn" class="rep-btn">[.%]</button>
       </div>
     </div>
-    <script>
-      function updateStandardTime() {
-        now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
-        const newStnTime = ("00"+hours).slice(-2)+":"+("00"+minutes).slice(-2)+":"+("00"+seconds).slice(-2);
-        const prevStnTime = document.getElementById("stn-time").innerHTML;
-        if (newStnTime != prevStnTime) {
-          document.getElementById("stn-time").innerHTML = newStnTime;
-        }
-      }
-
-      function updateDecimalTime() {
-        stnSecs = standardTimeToSeconds(new Date());
-        decSecs = stnSecs * (100000 / 86400);
-        decHrs = Math.floor(decSecs / 10000);
-        decSecs = decSecs - 10000 * decHrs;
-        decMins = Math.floor(decSecs / 100);
-        decSecs = Math.floor(decSecs - 100 * decMins);
-        const newDecTime = ("00"+decHrs).slice(-2)+"."+("00"+decMins).slice(-2)+"."+("00"+decSecs).slice(-2);
-        const prevDecTime = document.getElementById("dec-time").innerHTML;
-        if (newDecTime != prevDecTime) {
-          document.getElementById("dec-time").innerHTML = newDecTime;
-        }
-      }
-
-      function standardTimeToSeconds(ts) {
-        var hours = ts.getHours();
-        var minutes = ts.getMinutes();
-        var seconds = ts.getSeconds() + ts.getMilliseconds()/1000;
-        return (hours * 3600) + (minutes * 60) + seconds;
-      }
-      
-      setInterval(function () {
-        updateStandardTime();
-        updateDecimalTime();
-      }, 0);
-    </script>
   </body>
+  <script>
+    var repType = "decimal";
+
+    var titleSym = document.getElementById("title-symbol");
+
+    var decBtn = document.getElementById("dec-btn");
+    var fracBtn = document.getElementById("frac-btn");
+    var percBtn = document.getElementById("perc-btn");
+
+    decBtn.addEventListener("click", function () {
+      repType = "decimal";
+      decBtn.style.color = "rgb(0, 0, 140)";
+      fracBtn.style.color = "rgb(34, 34, 34)";
+      percBtn.style.color = "rgb(34, 34, 34)";
+      titleSym.innerHTML = "&nbsp[..]";
+    });
+
+    fracBtn.addEventListener("click", function () {
+      repType = "fraction";
+      fracBtn.style.color = "rgb(0, 0, 140)";
+      decBtn.style.color = "rgb(34, 34, 34)";
+      percBtn.style.color = "rgb(34, 34, 34)";
+      titleSym.innerHTML = "&nbsp[.d]";
+    });
+
+    percBtn.addEventListener("click", function () {
+      repType = "percent";
+      percBtn.style.color = "rgb(0, 0, 140)";
+      decBtn.style.color = "rgb(34, 34, 34)";
+      fracBtn.style.color = "rgb(34, 34, 34)";
+      titleSym.innerHTML = "&nbsp[.%]";
+    });
+  </script>
 </html>

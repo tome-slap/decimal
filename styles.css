@@ -7,7 +7,6 @@ html, body {
 #header-container {
   display: flex;
   flex-flow: row nowrap;
-  color: rgb(34, 34, 34);
   font-size: 3em;
   margin: auto;
   max-width: fit-content;
@@ -19,9 +18,8 @@ html, body {
 }
 
 .clocks-container {
-  display: grid;
-  grid-template-rows: 1fr 0.2fr 1fr;
-  row-gap: 3em;
+  display: flex;
+  flex-flow: column wrap;
   justify-content: space-between;
   align-content: center;
   justify-items: center;
@@ -29,8 +27,9 @@ html, body {
   max-width: fit-content;
 }
 
-#stn-clock, #dec-clock {
+#stn-clock {
   display: grid;
+  grid-area: "standard";
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   justify-content: space-between;
@@ -41,19 +40,63 @@ html, body {
   color: rgb(34, 34, 34);
 }
 
+#dec-clock {
+  display: grid;
+  grid-area: "decimal";
+  grid-template-columns: 3fr auto;
+  grid-template-rows: auto auto;
+  justify-content: space-between;
+  align-content: stretch;
+  justify-items: center;
+  align-items: end;
+  font-size: 3em;
+  color: rgb(34, 34, 34);
+}
+
+#dec-btn {
+  grid-area: "decimal";
+  grid-column: 2 / 2;
+  grid-row: 2 / 2;
+  color: rgb(0,0,140);
+}
+
+.rep-btn {
+  font-family: inherit;
+  font-size: 0.8em;
+  background-color: transparent;
+  margin: 0px;
+  border: none;
+}
+.rep-btn:hover {
+  color: rgb(0,0,140);
+}
+
+#frac-btn {
+  grid-area: "decimal";
+  grid-column: 2 / 2;
+  grid-row: 3 / 3;
+}
+
+#perc-btn {
+  grid-area: "decimal";
+  grid-column: 2 / 2;
+  grid-row: 4 / 4;
+}
+
 .time {
   grid-column: 1 / span 2;
-  color: rgb(34, 34, 34);
+  /* color: rgb(34, 34, 34); */
   font-size: 3em;
 }
 
 #dec-time {
+  align-self: end;
+  justify-self: end;
   color: rgb(0,0,140);
 }
 
-#stn-label, #dec-label {
+#stn-label {
   font-size: 0.8em;
-  line-height: 0.8em;
   grid-column: 1 / 1;
   justify-self: start;
   align-self: end;
@@ -61,7 +104,6 @@ html, body {
 
 #dec-label {
   font-size: 0.8em;
-  line-height: 0.8em;
   grid-column: 1 / 1;
   justify-self: end;
   align-self: end;
@@ -72,6 +114,8 @@ html, body {
   font-size: 3em;
   color: rgb(34, 34, 34);
   margin: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 
@@ -88,6 +132,9 @@ html, body {
   .divider {
     font-size: 2.2em;
   }
+  .rep-btn {
+    font-size: 0.8em;
+  }
 }
 
 @media (max-width: 800px) {
@@ -102,6 +149,9 @@ html, body {
   }
   .divider {
     font-size: 2em;
+  }
+  .rep-btn {
+    font-size: 0.7em;
   }
 }
 
@@ -118,6 +168,9 @@ html, body {
   .divider {
     font-size: 1.8em;
   }
+  .rep-btn {
+    font-size: 0.7em;
+  }
 }
 
 @media (max-width: 400px) {
@@ -132,5 +185,8 @@ html, body {
   }
   .divider {
     font-size: 1.6em;
+  }
+  .rep-btn {
+    font-size: 0.5em;
   }
 }
