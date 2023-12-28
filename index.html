@@ -1,65 +1,90 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>standard is decimal</title>
+    <title>decimal</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&amp;display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet" type="text/css" media="all">
-    <script src="clocks.js"></script>
+    <script src="clock.js"></script>
   </head>
   <body>
     <div id="header-container">
-        <span>[::] is</span><span id="title-symbol" style="color: rgb(0,0,140)">&nbsp;[..]</span>
+        <span id="stn-title-symbol">[::]&nbsp;</span>is<span id="dec-title-symbol">&nbsp;[..]</span>
     </div>
-    <div class="clocks-container">
-      <div id="stn-clock">
-        <span id="stn-label">STANDARD TIME [::]</span>
+    <div id="clocks-container">
+      <div id="stn-clock" class="clock">
+        <span id="stn-label" class="label">STANDARD TIME&nbsp;</span>
+        <button id="twofour-hr-btn" class="rep-btn">[::]</button>
+        <button id="twelve-hr-btn" class="rep-btn">[.:]</button>
+        <span id="am-pm"></span>
         <div id="stn-time" class="time"></div>
       </div>
       <div id="divider">is</div>
-      <div id="dec-clock">
+      <div id="dec-clock" class="clock">
         <div id="dec-time" class="time"></div>
-        <span id="dec-label">DECIMAL TIME&nbsp;</span>
-        <button id="dec-btn" class="rep-btn">[..]</button>
+        <button id="def-btn" class="rep-btn" style="color: rgb(0, 0, 140);">[..]</button>
         <button id="frac-btn" class="rep-btn">[.d]</button>
         <button id="perc-btn" class="rep-btn">[.%]</button>
+        <span id="dec-label" class="label">&nbsp;DECIMAL TIME</span>
       </div>
     </div>
+    <div id="links-container">
+      <a href="https://en.wikipedia.org/wiki/Decimal_time" target="_blank">[learn more]</a>&nbsp;&nbsp;
+      <a href="https://github.com/tome-slap/decimal" target="_blank">[github]</a></span>
+    </div>
+    <script>
+      var stnType = 24;
+      var decType = "default";
+
+      var stnTitleSym = document.getElementById("stn-title-symbol");
+      var decTitleSym = document.getElementById("dec-title-symbol");
+
+      var twoFourHrBtn = document.getElementById("twofour-hr-btn");
+      var twelveHrBtn = document.getElementById("twelve-hr-btn");
+      var amPmSpan = document.getElementById("am-pm");
+      
+      var defBtn = document.getElementById("def-btn");
+      var fracBtn = document.getElementById("frac-btn");
+      var percBtn = document.getElementById("perc-btn");
+
+      twoFourHrBtn.addEventListener("click", function () {
+        stnType = 24;
+        amPmSpan.style.visibility = "hidden";
+        stnTitleSym.innerHTML = "[::]&nbsp;";
+      });
+
+      twelveHrBtn.addEventListener("click", function () {
+        stnType = 12;
+        amPmSpan.style.visibility = "visible";
+        stnTitleSym.innerHTML = "[.:]&nbsp;";
+      });
+
+      defBtn.addEventListener("click", function () {
+        decType = "default";
+        defBtn.style.color = "rgb(0, 0, 140)";
+        fracBtn.style.color = "rgb(40, 40, 40)";
+        percBtn.style.color = "rgb(40, 40, 40)";
+        decTitleSym.innerHTML = "&nbsp;[..]";
+      });
+
+      fracBtn.addEventListener("click", function () {
+        decType = "fraction";
+        fracBtn.style.color = "rgb(0, 0, 140)";
+        defBtn.style.color = "rgb(40, 40, 40)";
+        percBtn.style.color = "rgb(40, 40, 40)";
+        decTitleSym.innerHTML = "&nbsp;[.d]";
+      });
+
+      percBtn.addEventListener("click", function () {
+        decType = "percent";
+        percBtn.style.color = "rgb(0, 0, 140)";
+        defBtn.style.color = "rgb(40, 40, 40)";
+        fracBtn.style.color = "rgb(40, 40, 40)";
+        decTitleSym.innerHTML = "&nbsp;[.%]";
+      });
+    </script>
   </body>
-  <script>
-    var repType = "decimal";
-
-    var titleSym = document.getElementById("title-symbol");
-
-    var decBtn = document.getElementById("dec-btn");
-    var fracBtn = document.getElementById("frac-btn");
-    var percBtn = document.getElementById("perc-btn");
-
-    decBtn.addEventListener("click", function () {
-      repType = "decimal";
-      decBtn.style.color = "rgb(0, 0, 140)";
-      fracBtn.style.color = "rgb(34, 34, 34)";
-      percBtn.style.color = "rgb(34, 34, 34)";
-      titleSym.innerHTML = "&nbsp[..]";
-    });
-
-    fracBtn.addEventListener("click", function () {
-      repType = "fraction";
-      fracBtn.style.color = "rgb(0, 0, 140)";
-      decBtn.style.color = "rgb(34, 34, 34)";
-      percBtn.style.color = "rgb(34, 34, 34)";
-      titleSym.innerHTML = "&nbsp[.d]";
-    });
-
-    percBtn.addEventListener("click", function () {
-      repType = "percent";
-      percBtn.style.color = "rgb(0, 0, 140)";
-      decBtn.style.color = "rgb(34, 34, 34)";
-      fracBtn.style.color = "rgb(34, 34, 34)";
-      titleSym.innerHTML = "&nbsp[.%]";
-    });
-  </script>
 </html>
