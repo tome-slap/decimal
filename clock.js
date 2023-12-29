@@ -20,9 +20,9 @@ function updateStandardTime() {
   }
 
   const newStnTime = ("00"+hours).slice(-2)+":"+("00"+minutes).slice(-2)+":"+("00"+seconds).slice(-2);
-  const prevStnTime = document.getElementById("stn-time").innerHTML;
+  const prevStnTime = document.getElementById("stn-clock").innerHTML;
   if (newStnTime != prevStnTime) {
-    document.getElementById("stn-time").innerHTML = newStnTime;
+    document.getElementById("stn-clock").innerHTML = newStnTime;
   }
 }
 
@@ -57,9 +57,9 @@ function updateDecimalTime() {
 
   }
 
-  const prevDecTime = document.getElementById("dec-time").innerHTML;
+  const prevDecTime = document.getElementById("dec-clock").innerHTML;
   if (newDecTime != prevDecTime) {
-    document.getElementById("dec-time").innerHTML = newDecTime;
+    document.getElementById("dec-clock").innerHTML = newDecTime;
   }
 }
 
